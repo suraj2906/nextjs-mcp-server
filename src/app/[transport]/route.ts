@@ -1,6 +1,18 @@
 import { createMcpHandler } from "@vercel/mcp-adapter";
 import { z } from "zod" 
 
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: {
+      "Access-Control-Allow-Origin": "*", // or restrict to your domain
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
+  });
+}
+
+
 const handler = createMcpHandler((server) => {
         server.tool( "courseRecommender",
             "Give a course recommendation based on experience level",
